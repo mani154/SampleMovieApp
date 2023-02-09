@@ -1,25 +1,28 @@
 .MovieContainer {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  width: 280px;
+  padding: 8px;
+  width: 240px;
   box-shadow: 0 3px 10px 0 #aaa;
   cursor: pointer;
+  margin: 0%;
 }
 
 .CoverImage {
-  object-fit: contain;
-  height: 362px;
+  object-fit: cover;
+  height: fit-content;
 }
 
 .MovieName {
   font-size: 18px;
   font-weight: 600;
   color: black;
-  margin: 15px 0;
+  margin: auto;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
   text-overflow: ellipsis;
+  justify-content: space-between;
 }
 .InfoColumn {
   display: flex;

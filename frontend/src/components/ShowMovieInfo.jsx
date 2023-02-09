@@ -26,6 +26,7 @@ const ShowMovieInfo = props => {
           <span className="MovieName">{movieInfo.Type}: <span>{movieInfo.Title}</span></span>
           <span className="MovieInfo">Genre: <span>{movieInfo.Genre}</span></span>
           <span className="MovieInfo">Release Year: <span>{movieInfo.Released}</span></span>
+          <span className="MovieInfo">Rating: <span>{movieInfo.Rated}</span></span>
           <span className="MovieInfo">
             Plot: 
             <span>{movieInfo.Plot}</span>
