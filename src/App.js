@@ -30,11 +30,11 @@ const App = (props) => {
     <div className="Container">
       <div className="Header">
         <div className="AppName">
-          <img className="MovieImage" src="/react-movie-app/movie-icon.svg" />
+          <img className="MovieImage" src="movie-icon.png" alt={""} />
           GetMovieInfo
         </div>
         <div className="SearchBox">
-          <img className="SearchIcon" src="/react-movie-app/search-icon.svg" />
+          <img className="SearchIcon" src="search-icon.png" alt={""} />
           <input className="SearchInput" placeholder="Search a Movie by name" value={searchText} onChange={onTextChange} />
         </div>
       </div>
@@ -42,7 +42,7 @@ const App = (props) => {
       <div className="MovieListContainer">
         {movieList?.length 
           ? movieList.map((movie, idx) => <MovieTile key={idx} movie={movie} setSelectedMovie={setSelectedMovie} />)
-          : <img className="ImagePlaceholder" src="/react-movie-app/movie-icon.svg" />}
+          : <img className="ImagePlaceholder" src="movie-icon.png" alt={""} />}
       </div>
     </div>
   );
