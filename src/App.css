@@ -67,3 +67,37 @@
   margin: 150px;
   opacity: 50%;
 }
+
+.Sort {
+  background-color: transparent;
+  color: white;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: 8px;
+  font-size: 16px;
+  box-shadow: 0 3px 6px 0 #555;
+  margin: right;
+}
+
+.SortButton {
+  padding: 8px 16px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

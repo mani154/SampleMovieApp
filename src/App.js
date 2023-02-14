@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieTile from './components/MovieTile';
 import ShowMovieInfo from './components/ShowMovieInfo';
@@ -11,19 +11,36 @@ const App = (props) => {
   const [searchText, setSearchText] = useState("");
   const [movieList, setMovieList] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState();
-  const [timeoutId, setTimeoutId] = useState();
+  const [sortConfig, setSortConfig] = useState({
+    isSortByNewest: true,
+    buttonText: 'Newest'
+  });
+
+  const sortMovieList = movieList => {
+    if(!movieList) {
+      return movieList;
+    }
+    return movieList.sort((movie1, movie2) => (parseInt(movie1.Year) <= parseInt(movie2.Year)) ? 1 : -1)
+  };
 
   const fetchMovieDetails = async searchText => {
     const res = await axios.get(`https://www.omdbapi.com/?s=${searchText}&apikey=${API_KEY}`);
-    setMovieList(res.data.Search);
+    setMovieList(sortMovieList(res.data.Search));
   };
 
-  const onTextChange = event => {
+  const onTextChange = async event => {
     const searchText = event.target.value;
     setSelectedMovie("");
-    clearTimeout(timeoutId);
     setSearchText(searchText);
-    setTimeoutId(setTimeout(() => fetchMovieDetails(searchText), 500));
+    await fetchMovieDetails(searchText);
+  }
+
+  const onSortButtonClick = () => {
+    setSortConfig({
+      isSortByNewest: !sortConfig.isSortByNewest,
+      buttonText: sortConfig.isSortByNewest ? 'Newest' : 'Oldest'
+    });
+    setMovieList(movieList.reverse());
   }
 
   return (
@@ -36,6 +53,9 @@ const App = (props) => {
         <div className="SearchBox">
           <img className="SearchIcon" src="search-icon.png" alt={""} />
           <input className="SearchInput" placeholder="Search a Movie by name" value={searchText} onChange={onTextChange} />
+        </div>
+        <div className="Sort">
+          Sort By: <br /><button className="SortButton" onClick={onSortButtonClick} disabled={movieList?.length <= 0}>{sortConfig.buttonText}</button>
         </div>
       </div>
       {selectedMovie && <ShowMovieInfo selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />}
