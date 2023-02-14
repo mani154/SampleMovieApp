@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import MovieTile from './components/MovieTile';
 import ShowMovieInfo from './components/ShowMovieInfo';
@@ -38,7 +38,7 @@ const App = (props) => {
   const onSortButtonClick = () => {
     setSortConfig({
       isSortByNewest: !sortConfig.isSortByNewest,
-      buttonText: sortConfig.isSortByNewest ? 'Newest' : 'Oldest'
+      buttonText: sortConfig.buttonText === 'Newest' ? 'Oldest' : 'Newest'
     });
     setMovieList(movieList.reverse());
   }
@@ -55,7 +55,7 @@ const App = (props) => {
           <input className="SearchInput" placeholder="Search a Movie by name" value={searchText} onChange={onTextChange} />
         </div>
         <div className="Sort">
-          Sort By: <br /><button className="SortButton" onClick={onSortButtonClick} disabled={movieList?.length <= 0}>{sortConfig.buttonText}</button>
+          Sort By: <br /><button className="SortButton" onClick={onSortButtonClick} disabled={movieList?.length <= 0 || searchText.length === 0}>{sortConfig.buttonText}</button>
         </div>
       </div>
       {selectedMovie && <ShowMovieInfo selectedMovie={selectedMovie} setSelectedMovie={setSelectedMovie} />}
