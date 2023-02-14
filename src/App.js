@@ -16,6 +16,13 @@ const App = (props) => {
     buttonText: 'Newest'
   });
 
+  const resetSortConfig = () => {
+    setSortConfig({
+      isSortByNewest: true,
+      buttonText: 'Newest'
+    });
+  }
+
   const sortMovieList = movieList => {
     if(!movieList) {
       return movieList;
@@ -33,6 +40,7 @@ const App = (props) => {
     setSelectedMovie("");
     setSearchText(searchText);
     await fetchMovieDetails(searchText);
+    resetSortConfig();
   }
 
   const onSortButtonClick = () => {
